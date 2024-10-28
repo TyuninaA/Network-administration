@@ -130,3 +130,39 @@ stacy@stacy-VirtualBox:~$ sudo ufw allow ssh
 2.3. Управление пользователями и настройка прав доступа:
 
 Были созданы пользователи и настроены права доступа:
+```console
+stacy@stacy-VirtualBox:~$ sudo adduser student
+Добавляется пользователь «student» ...
+Добавляется новая группа «student» (1002) ...
+Добавляется новый пользователь «student» (1002) в группу «student» ...
+Создаётся домашний каталог «/home/student» ...
+Копирование файлов из «/etc/skel» ...
+Новый пароль : 
+Повторите ввод нового пароля : 
+passwd: пароль успешно обновлён
+Изменение информации о пользователе student
+Введите новое значение или нажмите ENTER для выбора значения по умолчанию
+	Полное имя []: 
+	Номер комнаты []: 
+	Рабочий телефон []: 
+	Домашний телефон []: 
+	Другое []: 
+Данная информация корректна? [Y/n] Y
+stacy@stacy-VirtualBox:~$ sudo usermod -aG sudo student
+stacy@stacy-VirtualBox:~$ sudo touch /home/student/private_file.txt
+stacy@stacy-VirtualBox:~$ sudo chmod 700 /home/student/private_file.txt
+stacy@stacy-VirtualBox:~$ sudo chown student /home/student/private_file.txt
+stacy@stacy-VirtualBox:~$ ls -l /home/student/
+итого 0
+-rwx------ 1 student root 0 Қаз 28 15:03 private_file.txt
+```
+
+Заключение:
+
+В ходе работы были выполнены следующие задачи:
+
+    Установлена операционная система Ubuntu Server на виртуальной машине.
+    Настроены пользователи и группы, а также реализована автоматизация с помощью cron.
+    Настроена виртуальная сеть и установлены серверные службы, такие как SSH. Также были настроены права доступа для пользователей.
+
+Все команды, использованные в процессе выполнения работы, приведены выше вместе с их выводом.
