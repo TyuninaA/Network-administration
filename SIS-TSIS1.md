@@ -76,3 +76,57 @@ stacy@stacy-VirtualBox:~$ crontab -l
 # m h  dom mon dow   command
 * * * * * /home/devops/backup.sh
 ```
+
+
+2. Настройка виртуальной сети и серверных служб (СРОП)
+
+2.1. Создание виртуальной сети:
+
+В настройках VirtualBox для обеих виртуальных машин была настроена внутренняя сеть (Internal Network) для обмена данными между ними:
+
+    Открыт раздел "Сеть" для каждой машины.
+    Выбрана опция "Внутренняя сеть".
+
+После этого виртуальные машины могут обмениваться данными внутри одной сети.
+
+2.2. Установка и настройка SSH:
+
+Для удаленного доступа через терминал был установлен сервер SSH:
+```console
+stacy@stacy-VirtualBox:~$ sudo apt update
+[sudo] пароль для stacy: 
+12Попробуйте ещё раз.
+[sudo] пароль для stacy: 
+Сущ:1 http://security.ubuntu.com/ubuntu focal-security InRelease               
+Сущ:2 http://kz.archive.ubuntu.com/ubuntu focal InRelease                      
+Пол:3 http://kz.archive.ubuntu.com/ubuntu focal-updates InRelease [128 kB]
+Сущ:4 http://kz.archive.ubuntu.com/ubuntu focal-backports InRelease            
+Получено 128 kB за 7с (19,2 kB/s)                                              
+Чтение списков пакетов… Готово
+Построение дерева зависимостей       
+Чтение информации о состоянии… Готово
+Может быть обновлено 347 пакетов. Запустите «apt list --upgradable» для их показа.
+stacy@stacy-VirtualBox:~$ sudo systemctl status ssh
+● ssh.service - OpenBSD Secure Shell server
+     Loaded: loaded (/lib/systemd/system/ssh.service; enabled; vendor preset: e>
+     Active: active (running) since Mon 2024-10-28 14:55:45 +06; 5s ago
+       Docs: man:sshd(8)
+             man:sshd_config(5)
+   Main PID: 7009 (sshd)
+      Tasks: 1 (limit: 5152)
+     Memory: 1.0M
+     CGroup: /system.slice/ssh.service
+             └─7009 sshd: /usr/sbin/sshd -D [listener] 0 of 10-100 startups
+
+Қаз 28 14:55:45 stacy-VirtualBox systemd[1]: Starting OpenBSD Secure Shell serv>
+Қаз 28 14:55:45 stacy-VirtualBox sshd[7009]: Server listening on 0.0.0.0 port 2>
+Қаз 28 14:55:45 stacy-VirtualBox sshd[7009]: Server listening on :: port 22.
+Қаз 28 14:55:45 stacy-VirtualBox systemd[1]: Started OpenBSD Secure Shell serve>
+stacy@stacy-VirtualBox:~$ sudo ufw allow ssh
+Правила обновлены
+Правила обновлены (v6)
+```
+
+2.3. Управление пользователями и настройка прав доступа:
+
+Были созданы пользователи и настроены права доступа:
